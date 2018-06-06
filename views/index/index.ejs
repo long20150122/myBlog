@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>justTest</title>
+</head>
+<body>
+
+	<%- include('../common/head.ejs',{user: 'lilei'}); %>
+
+	<p>i just test ejs templet</p><%= title%>
+
+	<%- include('../common/foot.ejs',{sex: '男'}); %>
+
+	<form action="http://127.0.0.1:3001/upload" method="post" enctype="multipart/form-data">  
+	    <input type="file" name="file"/>  
+	    <input type="submit" value="ok"/>  
+	</form>
+	<br/>
+	<br/>
+	<br/>
+
+	<input type="file" id="uploadFile" accept="image/*" multiple="multiple">
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script>
+        document.querySelectorAll("#uploadFile")[0].addEventListener('change', function(){
+            // $(".progress_dialog").show();
+            console.log(132456);
+            if (!this.files.length) return;
+            var files = Array.prototype.slice.call(this.files);
+            if (files.length > 9) {
+                alert("最多同时只可上传9张图片");
+                return;
+            }
+            let imgArr = [];
+            files.forEach(function (file, i) {
+                var reader = new FileReader();
+                reader.onload=function(){
+                    imgArr.push(reader.result);
+                    /*var imgO = document.createElement("img");
+                    imgO.src = reader.result;*/
+                }
+                reader.readAsDataURL(file);
+                // $(".progress_dialog").hide();
+            });
+        }, false);
+	</script>
+</body>
+</html>
+
+
+<!-- var formdata = new FormData();
+// 上传到服务器的字段名称
+formdata.append("imgFile", $('#file')[0].files[0]);
+$.ajax({
+  url: self.url,
+  type: 'POST',
+  cache: false,
+  data: formdata,
+  timeout: 5000,
+  //必须false才会避开jQuery对 formdata 的默认处理 
+  // XMLHttpRequest会对 formdata 进行正确的处理
+  processData: false,
+  //必须false才会自动加上正确的Content-Type 
+  contentType: false,
+  xhrFields: {
+    withCredentials: true
+  },
+  success: function(data) {
+
+  },
+  error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+  } -->
