@@ -8,7 +8,7 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-const upload = require('./endTerminal/index')
+const upload = require('./endTerminal/upload')
 const ejs = require('ejs')
 
 // error handler
